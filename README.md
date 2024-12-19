@@ -1,74 +1,56 @@
-# 概述
-## jbone定位
-### 对企业
-jbone采用微服务架构，为中小企业提供系统管理、内容管理、电商平台等解决方案。使中小企业花最少的成本建立自己的电商平台、企业管理平台、支付平台等。
-jbone功能包括服务管理、系统管理平台、内容管理平台、电商平台、支付平台、工作流平台等子系统。
-### 对开发
-jbone为企业提供解决方案的同时，更重视对前沿技术的学习和探索；jbone使用spring cloud生态体系技术，采用微服务架构，为企业微服务架构提供一种解决方案，供开发人员学习和交流。
-其中包括服务注册与发现、服务监控、服务管理、服务治理、服务网关、服务熔断等常见微服务组件。
-## 技术交流
-QQ群：547104190
-# 系统设计
-## jbone功能架构图
-![Jbone功能架构图](doc/功能架构图.png)
-## jbone物理结构图
-![Jbone物理架构图](doc/物理架构图.png)
-## 项目模块划分
-* jbone-cas : 用户单点登录模块
-    * jbone-cas-client：客户端jar包，用于集成到需要CAS授权的系统
-    * jbone-cas-server：CAS服务端，单独部署，用于完成单点登录、票据管理等
-    * jbone-cas-manager：CAS服务管理，用于管理授权服务等
-* jbone-sm : 服务管理模块
-    * jbone-sm-admin : 服务管理系统，包括服务监控、服务管理等
-    * jbone-sm-register : 服务注册中心，原则上所有服务都要注册进来
-    * jbone-sm-monitor : 服务监控系统，主要包含服务调用链分析和trace跟踪
-* jbone-sys : 系统管理模块
-    * jbone-sys-admin ： 系统管理后台
-    * jbone-sys-api : 系统服务对外接口定义
-    * jbone-sys-api-feign : 基于Spring Cloud Feign的调用实现
-    * jbone-sys-core : 系统管理核心
-    * jbone-sys-server : 系统管理服务
-* jbone-tag ：全平台标签系统
-* jbone-cms ：内容管理模块
-* jbone-bpm : 工作流模块
-* jbone-common : 共用模块
-* jbone-configuration : 公共配置模块
-* jbone-eb : 电商平台模块
-    * jbone-eb-portal : 电商平台电商门户
-    * jbone-eb-shop : 电商平台店铺中心
-    * jbone-eb-item : 电商平台商品中心
-    * jbone-eb-trade: 电商平台交易中心
-    * jbone-eb-pay : 电商平台支付中心
-    * jbone-eb-category : 电商平台类目中心
-    * jbone-eb-collect : 电商平台收藏中心
-    * jbone-eb-comment : 电商平台评论中心
-    * jbone-eb-risk : 电商平台风控中心
-    * jbone-eb-search : 电商平台搜索引擎
-    * jbone-eb-recommend : 电商平台推荐引擎
-    * jbone-eb-card : 电商平台购物车
-    * jbone-eb-market : 电商平台营销中心
-    * jbone-eb-logistics : 电商平台物流系统
-    * jbone-eb-shopmanager : 电商平台店长管理后台
-    * jbone-eb-consumer : 电商平台消费者个人中心
-    * jbone-eb-manager : 电商平台电商门户管理后台 
-* jbone-pay : 支付平台模块
-* jbone-im : 即时通信模块
-* jbone-ui : 以webjars形式管理前端静态资源，所有包含页面的工程需要依赖此模块。
-## 电商平台
-![电商平台](doc/电商平台/电商功能架构图.png)
-### 部分数据结构
-![电商平台数据结构](doc/电商平台/数据库关系图.png)
-## 非功能设计
-### 可用性
-HA >=99.99%（无任何单点问题，对单点故障零容忍）
-### 性能设计
-RTT < 1S（客户端的感受会受客户机器和网络的影响）
 
-单机QPS：>100（系统容量根据机器的大小伸缩）
-### 伸缩性设计
-所有系统可以根据访问量，通过添加／减少机器的数量，实现系统伸缩
-### 耦合性
-所有系统均单独部署，除权限等基础数据外，全都相互隔离
+## 强烈推荐Dubbo学习教程：
+## [深入剖析Dubbo架构设计和实现原理](https://juejin.cn/book/7069596046602534919)
+
+![Jbone logo](doc/images/logo-text.png)
+
+jbone是基于Spring Cloud开发的项目群，是对Spring Cloud微服务架构的综合应用实践和基础开发框架
+
+[jbone.cn](http://jbone.cn)
+
+**功能架构图**
+
+![Jbone功能架构图](doc/images/features.png)
+
+**项目成员**
+
+
+项目名 | 简介 | 项目地址
+---- | ------ | ----
+jbone-sso | 单点登录模块 | [github](https://github.com/417511458/jbone-sso) , [码云](https://gitee.com/majunwei2017/jbone-sso)
+jbone-service-management | 服务管理模块(包含注册中心、服务网关、服务监控、调用链追踪等)  |  [github](https://github.com/417511458/jbone-service-management) , [码云](https://gitee.com/majunwei2017/jbone-service-management)
+jbone-system | 系统管理模块,通用权限管理等 | [github](https://github.com/417511458/jbone-system) , [码云](https://gitee.com/majunwei2017/jbone-system)
+jbone-system-admin | 系统管理后台 | [github](https://github.com/417511458/jbone-system-admin) , [码云](https://gitee.com/majunwei2017/jbone-system-admin)
+jbone-fs | 文件系统，用于存储和管理文件、图片等 | [github](https://github.com/417511458/jbone-fs) , [码云](https://gitee.com/majunwei2017/jbone-fs)
+jbone-cms | 多站点内容管理系统 | [github](https://github.com/417511458/jbone-cms) , [码云](https://gitee.com/majunwei2017/jbone-cms)
+jbone-common | 公共模块，封装工具类等 | [github](https://github.com/417511458/jbone) , [码云](https://gitee.com/majunwei2017/jbone)
+jbone-banner | jbone通用艺术banner | [github](https://github.com/417511458/jbone) , [码云](https://gitee.com/majunwei2017/jbone)
+jbone-configuration | 公共配置模块 | [github](https://github.com/417511458/jbone) , [码云](https://gitee.com/majunwei2017/jbone)
+jbone-ui | 以webjars形式管理前端静态资源，所有包含页面的工程需要依赖此模块。 | [github](https://github.com/417511458/jbone) , [码云](https://gitee.com/majunwei2017/jbone)
+jbone-b2b2c | 多店铺电商平台 (未完成) | [github](https://github.com/417511458/jbone-b2b2c) , [码云](https://gitee.com/majunwei2017/jbone-b2b2c)
+jbone-bpm | 工作流模块(未完成) | [github](https://github.com/417511458/jbone-bpm) , [码云](https://gitee.com/majunwei2017/jbone-bpm)
+
+# 交流方式
+
+[项目官网](http://jbone.cn)
+
+QQ群：992113778（2群）、547104190（1群）
+
+公众号：writebugs
+
+作者QQ：417511458
+
+作者微信：dreamming_now
+
+微信群：先添加作者好友再加入
+
+# 系统简介
+
+## 系统要求
+
+**JDK11+**
+
+
 ## 技术选型
 技术 | 简介 | 网址
 ---- | ------ | ----
@@ -82,7 +64,7 @@ Spring Cloud Feign | 微服务声明式调用框架 | [https://projects.spring.i
 Spring Boot Admin | 服务管理中心 | [https://github.com/codecentric/spring-boot-admin](https://github.com/codecentric/spring-boot-admin)
 Spring Data Jpa | 持久化框架 | [https://projects.spring.io/spring-data-jpa/](https://projects.spring.io/spring-data-jpa/)
 Spring Data Redis | 缓存框架 | [https://projects.spring.io/spring-data-redis/](https://projects.spring.io/spring-data-redis/)
-Apache Shiro | 安全框架 | [http://shiro.apache.org/](http://shiro.apache.org/)
+Apache Shiro | 权限框架 | [http://shiro.apache.org/](http://shiro.apache.org/)
 thymeleaf-extras-shiro | thymeleaf的shiro标签 | [https://github.com/theborakompanioni/thymeleaf-extras-shiro](https://github.com/theborakompanioni/thymeleaf-extras-shiro)
 Apereo CAS | 单点登陆框架 | [https://github.com/apereo/cas](https://github.com/apereo/cas)
 Spring Validator | 后端验证框架 | [https://projects.spring.io/spring-framework/](https://projects.spring.io/spring-framework/)
@@ -93,171 +75,47 @@ Thymeleaf | 模板引擎  | [http://www.thymeleaf.org/](http://www.thymeleaf.org
 Maven | 项目构建管理  | [http://maven.apache.org/](http://maven.apache.org/)
 Redis | 分布式缓存数据库 | [https://redis.io/](https://redis.io/)
 Mysql | 对象关系数据库 | [https://www.mysql.com/](https://www.mysql.com/)
-## Jbone CAS(认证中心)
-### 实现方式
-服务采用Apereo CAS作为登录认证中心，底层集成Shiro，通过Spring Cloud Feign声明式调用权限数据，完成用户授权。
-### 定制登录认证页面
-考虑到不同系统可能有显示不同风格的登录页面，后端支持配置系统登录皮肤（登录皮肤需要自己开发），也可使用默认视图。
 
-默认视图加载系统的名字和描述信息，以下为登录服务管理系统的视图：
-![CAS登录](doc/loginview.png)
-## Jbone SM Admin(服务管理中心)
-### 实现方式
-集成Spring Boot Admin 、Spring Cloud Hystrix，完成服务和JVM的监控
-### 进入方式
-http://jbone-sm-admin.majunwei.com:100002/admin,调入CAS认证中心，输入jbone／jbone，即可进入
-### 功能简介
-篇幅有限，简单介绍下：
+## 功能预览
+### Jbone CAS(认证中心)
+![CAS登录](doc/images/loginview.png)
+### Jbone SM Admin(服务管理中心)
+**系统监控墙**
 
-**系统健康概况及内存和JVM概况**
+![系统监控墙](doc/images/bootadmin-wallboard.png)
 
-![系统内存分析](doc/admin_index.jpg)
+**系统详情**
 
-**环境变量**
+![系统详情](doc/images/bootadmin-instancedetails.png)
 
-![环境变量](doc/admin_properties.png)
-## 调用链跟踪
-### trace跟踪
-![trace](doc/sm_monitor_01.png)
-### 调用链
-![调用链](doc/sm_monitor_02.png)
-## CAS系统管理
-![CAS系统管理](doc/cas-manager.png)
-## Jbone系统管理
-### 系统管理
-![Jbone系统管理](doc/systemManager.png)
-### 用户管理
-![用户管理](doc/userManager.png)
-### 角色管理
-![角色管理](doc/roleManager.png)
-### 菜单管理
-![菜单管理](doc/menuManager.png)
-### 权限管理
-![权限管理](doc/permissionManager.png)
-## jbone功能和进度表
-![进度](doc/jboneProcess.png)
-# jbone部署说明
-## 下载代码
-将代码clone下来并导入idea或eclipse；
-## 创建数据库
-注意要在application.properties里修改自己到数据库用户名和密码
-### jbone_sys
-创建数据库jbone_sys,并通过doc/jbone_sys.sql创建表和初始化数据；
-### jbone_cas
-创建数据库jbone_cas,并通过doc/jbone_cas.sql创建表和初始化数据；
-### jbone-zipkin（调用链使用）
-创建数据库jbone_zipkin,并通过doc/jbone_zipkin.sql创建表和初始化数据；
-## 启动redis
-安装redis并在本地启动
-## 安装并启动RabbitMq(调用链使用)
-安装RabbitMq并在本地启动
-## 配置域名
-```javascript
-127.0.0.1 jbone-sm-register.majunwei.com
-127.0.0.1 jbone-cas.majunwei.com
-127.0.0.1 jbone-sys-server.majunwei.com
-127.0.0.1 jbone-sm-admin.majunwei.com
-127.0.0.1 jbone-sys-admin.majunwei.com
-127.0.0.1 jbone-sm-monitor.majunwei.com
-127.0.0.1 jbone-cas-manager.majunwei.com
-127.0.0.1 jbone-tag-admin.majunwei.com
-127.0.0.1 jbone-eb-portal.majunwei.com
-127.0.0.1 jbone-eb-manager.majunwei.com
-127.0.0.1 jbone-eb-consumer.majunwei.com
-127.0.0.1 jbone-eb-seller.majunwei.com
-127.0.0.1 jbone-bpm-admin.majunwei.com
-127.0.0.1 jbone-bpm-server.majunwei.com
-```
+**JVM线程监控**
 
+![JVM线程监控](doc/images/bootadmin-instancethread.png)
 
+**Hystrix流量和熔断监控**
+![Hystrix流量和熔断监控](doc/images/hystrix监控.png)
 
-## 配置CAS证书
-1、生成证书
-sudo keytool -genkey -alias jbonekeystore -keyalg RSA -keystore /etc/cas/jbonekeystore
+### 调用链跟踪
+![trace](doc/images/zipkin_01.png)
 
-注意：要把jbone-cas.majunwei.com填进去；
+### Jbone系统管理
+**系统管理**
+![Jbone系统管理](doc/images/systemManager.png)
+**用户管理**
+![用户管理](doc/images/userManager.png)
+**角色管理**
+![角色管理](doc/images/roleManager.png)
+**菜单管理**
+![菜单管理](doc/images/menuManager.png)
+**权限管理**
+![权限管理](doc/images/permissionManager.png)
 
-输入口令：123456
-
-2、导出证书
-
-sudo keytool -export -file /etc/cas/jbonekeystore.crt -alias jbonekeystore -keystore /etc/cas/jbonekeystore
-
-注意：这里输入到是上面设置的密码：123456
-
-3、倒入证书到本地JDK（客户端认证）
-
-sudo keytool -import -keystore /Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home/jre/lib/security/cacerts -file /etc/cas/jbonekeystore.crt -alias jbonekeystore
-
-注意：
-
-1、这里要找到自己的JDK位置
-
-2、这里的密码输入changeit，信任证书
-
-常见错误：
-
-keytool 错误: java.io.IOException: Keystore was tampered with, or password was incorrect
-
-原因：
-
-输入密码的时候输入changeit
-
-4、配置tomcat SSL
-
-找到server.xml中配置SSL的位置，填写如下内容：
-```xml
-<Connector port="8443" protocol="org.apache.coyote.http11.Http11NioProtocol" SSLEnabled="true"
-               maxThreads="150" scheme="https" secure="true"
-               clientAuth="false" sslProtocol="TLS"
-               keystoreFile="/etc/cas/jbonekeystore"
-               keystorePass="123456" />
-```
-
-注意：这里是tomcat8，其他版本的配置方式可能不同，主要表现在protocol属性上。
-
-5、将jbone-cas-server添加到tomcat中，可使用idea部署，或单独启动tomcat部署
-
-常见问题：
-
-Open quote is expected for attribute "keystorePass" associated with an  element type  "Connector".
-
-原因有可能是配置的属性符号问题，比如中文的引号
-
-## 启动应用
-依次启动：
-
-1. jbone-sm-register
-
-2. jbone-sm-admin
-
-3. jbone-sys-server
-
-4. jbone-sys-admin
-
-5. jbone-cas-server (支持两种部署方式)
-
-
-> 单独部署方式：在tomcat单独部署（https端口号8443）
-
-> SpringBootApp方式：将 `jbonekeystore` 放入 `resources` 目录下，直接运行 `CasWebApplication` 主程序
-
-6. jbone-cas-manager(tomcat中运行,http端口号30002)
-
-## 进入系统
-系统管理：http://jbone-sys-admin.majunwei.com:20002/
-服务管理：http://jbone-sm-admin.majunwei.com:10002/
-调用链：http://jbone-sm-monitor.majunwei.com:10003/
-CAS系统管理：http://jbone-cas-manager.majunwei.com:30002/
-
-默认用户名密码：jbone/jbone
-
-# 关键开源技术介绍
-## Spring Boot架构图
-![Spring Boot架构图](doc/diagram-boot-reactor.png)
-## Spring Cloud架构图
-![Spring Cloud架构图](doc/diagram-distributed-systems.png)
-## CAS认证过程
-![CAS认证过程](doc/cas_protocol.jpg)
-
-
+### Jbone CMS（内容管理系统）
+**首页**
+![Jbone CMS首页](doc/images/cms_index.png)
+**文章详情页**
+![Jbone CMS文章](doc/images/cms_article.png)
+**专题页**
+![Jbone CMS专题](doc/images/cms_special.png)
+**后台管理**
+![Jbone CMS后台管理](doc/images/cms_admin.png)

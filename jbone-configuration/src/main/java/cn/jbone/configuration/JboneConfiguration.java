@@ -1,11 +1,13 @@
 package cn.jbone.configuration;
 
-import cn.jbone.configuration.props.CasProperties;
+import cn.jbone.configuration.props.SsoProperties;
+import cn.jbone.configuration.props.FSProperties;
 import cn.jbone.configuration.props.RpcProperties;
 import cn.jbone.configuration.props.SysProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.NestedConfigurationProperty;
 import org.springframework.context.annotation.Configuration;
 
 import javax.annotation.PostConstruct;
@@ -25,12 +27,18 @@ public class JboneConfiguration {
     /**
      * CAS配置
      */
-    private CasProperties cas = new CasProperties();
+    private SsoProperties sso = new SsoProperties();
 
     /**
      * 远程调用配置
      */
     private RpcProperties rpc = new RpcProperties();
+
+    /**
+     * 文件系统配置
+     */
+    @NestedConfigurationProperty
+    private FSProperties fs = new FSProperties();
 
 
     public SysProperties getSys() {
@@ -41,12 +49,12 @@ public class JboneConfiguration {
         this.sys = sys;
     }
 
-    public CasProperties getCas() {
-        return cas;
+    public SsoProperties getSso() {
+        return sso;
     }
 
-    public void setCas(CasProperties cas) {
-        this.cas = cas;
+    public void setSso(SsoProperties sso) {
+        this.sso = sso;
     }
 
     public RpcProperties getRpc() {
@@ -57,11 +65,19 @@ public class JboneConfiguration {
         this.rpc = rpc;
     }
 
+    public FSProperties getFs() {
+        return fs;
+    }
+
+    public void setFs(FSProperties fs) {
+        this.fs = fs;
+    }
+
     @Override
     public String toString() {
         return "JboneConfiguration{" +
                 "sys=" + sys +
-                ", cas=" + cas +
+                ", sso=" + sso +
                 ", rpc=" + rpc +
                 '}';
     }
